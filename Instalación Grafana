@@ -1,0 +1,39 @@
+*************INSTALACIÓN GRAFANA EN RASPBERRY***********************
+
+---------------REQUISITOS -----------------------
+Tener instalado el sistema Operativo Raspberry Pi (64 bits)
+
+1. Agregue la clave APT utilizada para autenticar paquetes:
+
+sudo mkdir -p /etc/apt/keyrings/
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+
+2. Agregue el repositorio APT de Grafana:
+
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+
+3. Instalar Grafana:
+
+sudo apt-get update
+sudo apt-get install -y grafana
+
+- Para asegurarnos de que Grafana se inicie incluso si se reinicia la Raspberry Pi, debemos habilitar e iniciar el servicio Systemctl de Grafana.
+
+* Habilite el servidor Grafana:
+
+sudo /bin/systemctl enable grafana-server
+
+* Inicie el servidor Grafana:
+
+sudo /bin/systemctl start grafana-server
+
+* Abra un navegador y vaya a la dirección IP  que utilizó para conectarse a la Raspberry Pi. Se le da la bienvenida con la página de inicio de sesión de Grafana.
+
+http://<Dirección_IP>:3000
+
+* Inicie sesión en Grafana con el nombre de usuario predeterminado y la contraseña predeterminada.
+
+Usuario: admin
+Contraseña: admin
+
+* Cambie la contraseña del usuario administrador cuando se le solicite.
